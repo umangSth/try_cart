@@ -45,9 +45,13 @@ function products(){
     $get = 'SELECT * FROM products WHERE quantity > 0 ORDER by id DESC';   
     $result = mysqli_query($conn, $get); 
        while($get_row = mysqli_fetch_array($result)){
+           $img_url = "http://localhost/try_cart/img/product/".$get_row["image"];
+           echo '<img src="'.$img_url.'"><br>';
            echo '<p>'.$get_row['name'].'<br>'.$get_row['description'].
            '<br> &pound'.number_format($get_row['price'], 2).
-           '<a href="includes/cart.php?add='.$get_row['id'].'">Add</a></p>';
+           '<a href="includes/cart.php?add='.$get_row['id'].'">Add</a>
+           ';
+           echo '<a href="includes/delete.php?del='.$get_row['id'].'">Delete Item DB</a></p>';
        }    
 }
 
@@ -77,6 +81,8 @@ function paypal_items(){
 
 function cart() {
     $conn = mysqli_connect("localhost", "root", "", "items");
+    $total= 0;
+    $sub=0;
     foreach($_SESSION as $name => $value){
         if ($value > 0) {
             if(substr($name, 0, 5) == 'cart_'){

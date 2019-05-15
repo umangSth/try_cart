@@ -3,6 +3,8 @@
 require 'dbh.inc.php';
 
 if(isset($_POST['submit'])){
+    $productDescription = $_POST['productDescription'];
+    $deliveryCharge = $_POST['deliveryCharge'];
     $productImage = $_FILES['productImage'];
     $productName = mysqli_real_escape_string($conn, $_POST['productName']);
     $price = $_POST['price'];
@@ -29,7 +31,7 @@ if(isset($_POST['submit'])){
                
                 $productImageDestination = '../img/product/'.$productImageName;
                 move_uploaded_file($productImageTmpName, $productImageDestination);
-                $sql = "INSERT INTO  menu_cart (image, name, price) VALUES ('$productImageName', '$productName', '$price')";
+                $sql = "INSERT INTO  products (name, description, price, shipping, image) VALUES ('$productName', '$productDescription', '$price', '$deliveryCharge','$productImageName')";
                 mysqli_query($conn, $sql);
                 header("Location: ../CoolAdmin-master/admin.php?uploadsuccess");
 
