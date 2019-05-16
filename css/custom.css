@@ -1,6 +1,113 @@
-body {
-    background-color: #fff6f6
+
+
+
+/* my style code */
+
+/* my style code */
+
+/* my style code */
+
+
+
+.main-wrapper {
+    margin: 0 auto;
+    width: 80%;
+
 }
+a{
+    text-decoration: none;
+}
+
+body {
+    background-color: rgb(241, 233, 233);
+}
+
+header nav {
+    width: 100%;
+    height: 60px;
+    background-color:#fff;
+    position: fixed;
+    z-index: 1;
+    text-align: center;
+}
+
+header nav ul {
+    float: left;
+}
+
+
+header nav ul li{
+    float: left;
+    list-style: none;
+}
+
+header nav ul li a{
+    font-family: Arial;
+    font-size: 20px;
+    color: #111;
+    line-height: 63px;
+
+}
+
+header .nav-login{
+    float: right;
+}
+
+header .nav-login form{
+    float: left;
+    padding-top: 15px;
+}
+
+header .nav-login form input{
+    float: left;
+    width: 140px;
+    height: 30px;
+    padding: 0 10px;
+    margin-right: 10px;
+    border: none;
+    background-color: #ccc;
+    font-family: Arial;
+    font-size: 14px;
+    color: #111;
+    line-height: 30px;
+}
+header .nav-login form button{
+    float: left;
+    width: 80px;
+    height: 30px;
+    margin-right: 5px;
+    border: none;
+    background-color: #f3f3f3;
+    font-family: Arial;
+    font-size: 14px;
+   text-align: center;
+    padding: 1px;
+    color: #111;
+    cursor: pointer;
+}
+header .nav-login form button:hover{
+  
+    background-color: #ccc;
+   
+}
+header nav-login a{
+
+    display: block;
+    width:60px;
+    height: 50px;
+    border:none;
+    float: left;
+    background-color: #fff;
+    font-family: Arial;
+    font-size: 16px;
+    color: #111;
+    line-height: 63px;
+    cursor: pointer;
+     margin-top: 10px;
+
+}
+
+
 h1 {
     text-align: center;
 }
@@ -9,9 +116,6 @@ h4 {
     font-weight: 700;
 }
 
-.logo{
-    width: 200px
-}
 h3{
     font-size: 25px;
     vertical-align: center;
@@ -19,15 +123,7 @@ h3{
     margin: 10px 0 0 0;
     
 }
-header {
-    padding: 10px 0 0 0;
-    background: white;
-    text-align: center;
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    z-index: 1;
-}
+
 @media (min-width: 900px) {
     header {
         text-align: left;
@@ -101,44 +197,7 @@ ul {
 }
 
 
-.main-bar {
-    padding: 20px 0;
-   background: #741d51; /* Old browsers */
-   background: -moz-linear-gradient(left, #741d51 0%, #e44e52 100%); /* FF3.6-15 */
-   background: -webkit-linear-gradient(left, #741d51 0%,#e44e52 100%); /* Chrome10-25,Safari5.1-6 */
-   background: linear-gradient(to right, #741d51 0%,#e44e52 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#741d51', endColorstr='#e44e52',GradientType=1 ); /* IE6-9 */
-}
 
-.main-bar p {
-    margin:0;
-    color: white;
-}
-.icon {
-    background-repeat: no-repeat;
-    background-position: left center;
-    padding-left: 60px;
-    background-size: 30px;
-    margin-bottom: 40px;
-    text-align: center;
-}
-@media (min-width: 750px) {
-    .icon {
-        margin-bottom:0;
-    }
-}
-
-
-
-.icon1 {
-    background-image: url(../img/icon1.png);
-}
-.icon2 {
-    background-image: url(../img/icon2.png);
-}
-.icon3 {
-    background-image: url(../img/icon3.png);
-}
 
 #courses-list .row {
     margin-bottom:20px;
@@ -176,9 +235,49 @@ ul {
     margin-top: 40px;
     border-top:1px solid #aaa;;
     padding-top: 40px;
+    background-color: rgb(245, 245, 245);
 }
 .footer .menu a{
 display: block;
 margin-bottom: 10px;
 text-decoration: none;
+}
+
+/* signup.php */
+
+.main-container{
+    height: 670px;
+}
+.signup-form {
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.signup-form input{
+    width: 90%;
+    height: 40px;
+    padding: 0 5%;
+    margin-bottom: 8px;
+    border: none;
+    background-color: rgb(255, 254, 254);
+    font-family: Arial;
+    font-size: 16px;
+    color: #111;
+    line-height: 40px;
+}
+.signup-form button{
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    height: 40px;    
+    border: none;
+    background-color: #222;
+    font-family: Arial;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}
+.signup-form button:hover{
+    background-color: #111;
 }

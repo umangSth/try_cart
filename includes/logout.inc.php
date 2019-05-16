@@ -2,6 +2,10 @@
 
 
 session_start();
-session_unset();
-session_destroy();
+unset($_SESSION['userId']);
+
+unset($_SESSION['userUid']);
+
+unset($_SESSION['userType']);
+
 header("location: ../index.php");
