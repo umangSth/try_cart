@@ -3,7 +3,11 @@
  ?>
 
 <br><br><br>
-    <?php cart(); ?>
+
+    <?php
+    
+    
+    cart(); ?>
     <br><br>
      <?php products(); ?>
 

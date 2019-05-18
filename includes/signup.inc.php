@@ -12,26 +12,26 @@ if (isset($_POST["signup-submit"])) {
 
 	if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat) || empty($mobileNumber
 	) || empty($address) ){
-		header("Location:../signup.php?error=emptyfields&uid=".$username."&mail=".$email."&phone=".$mobileNumber."&city=".$address."&street=".$streetName);
+		header("Location:../customerSignup.php?error=emptyfields&uid=".$username."&mail=".$email."&phone=".$mobileNumber."&city=".$address."&street=".$streetName);
 		exit();
 	}
 	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username) ){
-		header("Location:../signup.php?error=invalidmailuid");
+		header("Location:../customerSignup.php?error=invalidmailuid");
 	}
 	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  #filter_validate_email checks if email is valid or not
-		header("Location:../signup.php?error=invalidmail&uid=".$username);
+		header("Location:../customerSignup.php?error=invalidmail&uid=".$username);
 		exit(); 
 	}
 	elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {  #filter_validate_email checks if email is valid or not
-		header("Location:../signup.php?error=invaliduid&mail=".$email);
+		header("Location:../customerSignup.php?error=invaliduid&mail=".$email);
 		exit();
 	}
 	elseif (!preg_match("/^[0-9]*$/", $mobileNumber)) {  #checks if the mobile number is valid or not
-		header("Location:../signup.php?error=invalidphone&mail=".$email."&uid=".$username);
+		header("Location:../customerSignup.php?error=invalidphone&mail=".$email."&uid=".$username);
 		exit();
 	}
 	elseif ($password !== $passwordRepeat) {
-		header("Location:../signup.php?error=passwordcheck&mail=".$email."&uid=".$username);
+		header("Location:../customerSignup.php?error=passwordcheck&mail=".$email."&uid=".$username);
 		exit();
 		# code...
 	}
@@ -39,7 +39,7 @@ if (isset($_POST["signup-submit"])) {
 		$sql = "SELECT UserName FROM users WHERE UserName=?";
 		$stmt = mysqli_stmt_init($conn); #check connection between database and user login
 		if (!mysqli_stmt_prepare($stmt,$sql)) {
-			header("Location:../signup.php?error=sqlerror");
+			header("Location:../customerSignup.php?error=sqlerror");
 			exit();
 		}
 		else {
@@ -48,7 +48,7 @@ if (isset($_POST["signup-submit"])) {
 			mysqli_stmt_store_result($stmt);
 			$resultCheck = mysqli_stmt_num_rows($stmt);	
 			if ($resultCheck > 0) {
-				header("Location:../signup.php?error=usertaken&mail=".$email);
+				header("Location:../customerSignup.php?error=usertaken&mail=".$email);
 				exit();
 
 			}
@@ -56,14 +56,14 @@ if (isset($_POST["signup-submit"])) {
 				$sql = "INSERT INTO users (UserName, UserEmail, UserAddress, UserPhone, UserPassword) VALUES (?, ?, ?, ?, ?)"; #insert value in table in sql
 				$stmt = mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt,$sql)) {
-					header("Location:../signup.php?error=sqlerror"); #checkks if stmt and sql statement works together 
+					header("Location:../customerSignup.php?error=sqlerror"); #checkks if stmt and sql statement works together 
 					exit();
-			}
+				}
 				else {
 					$hashedpwd = password_hash($password, PASSWORD_DEFAULT);
 					mysqli_stmt_bind_param($stmt,"sssis",$username, $email, $address, $mobileNumber, $hashedpwd );
 					mysqli_stmt_execute($stmt);
-					header("Location:../signup.php?signup=success"); 
+					header("Location:../customerSignup.php?signup=success"); 
 					exit();
 
 				}
@@ -76,6 +76,6 @@ if (isset($_POST["signup-submit"])) {
 
 } 
 else {
-	header("Location: ../signup.php");
+	header("Location: ../customerSignup.php");
 	exit();
 }

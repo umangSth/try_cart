@@ -65,7 +65,8 @@ function restaurantlogin(){
 						$_SESSION['userId'] = $row['R_User'];
 						$_SESSION['userUid'] = $row['R_Email'];
 						$_SESSION['userType'] = $row['userType'];
-						header("Location: ../CoolAdmin-master/admin.php?login=success");
+						$_SESSION['R_Id']=$row['R_Id'];
+						header("Location: ../CoolAdmin-master/restaurantpage.php?login=success");
 					   exit();
 				}
 				else{
@@ -122,13 +123,16 @@ function login(){
 						$_SESSION['userId'] = $row['UserName'];
 						$_SESSION['userUid'] = $row['UserEmail'];
 						$_SESSION['userType'] = $row['userType'];
+						
 						header("Location: ../CoolAdmin-master/admin.php?login=success");
 					   exit();
 					}
 					else if($row['userType'] == 'customer'){
 					 session_start();
 					 $_SESSION['userId'] = $row['UserName'];
- 					$_SESSION['userUid'] = $row['UserEmail'];
+					 $_SESSION['userUid'] = $row['UserEmail'];
+					 $_SESSION['userAddress'] = $row['UserAddress'];
+					 $_SESSION['userPhone'] = $row['UserPhone'];
  					header("Location: ../index.php?login=success");
 					exit();
 					}

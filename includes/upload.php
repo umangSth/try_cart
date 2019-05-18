@@ -1,13 +1,17 @@
 <?php
 
 require 'dbh.inc.php';
+session_start();
+
 
 if(isset($_POST['submit'])){
+    $R_Id = 0;
     $productDescription = $_POST['productDescription'];
     $deliveryCharge = $_POST['deliveryCharge'];
     $productImage = $_FILES['productImage'];
     $productName = mysqli_real_escape_string($conn, $_POST['productName']);
     $price = $_POST['price'];
+    $R_Id = $_SESSION['R_Id'];
 
     
     // this all, represent the different parameter in a image  
@@ -31,9 +35,9 @@ if(isset($_POST['submit'])){
                
                 $productImageDestination = '../img/product/'.$productImageName;
                 move_uploaded_file($productImageTmpName, $productImageDestination);
-                $sql = "INSERT INTO  products (name, description, price, shipping, image) VALUES ('$productName', '$productDescription', '$price', '$deliveryCharge','$productImageName')";
+                $sql = "INSERT INTO  products (name, description, price, shipping, image, R_Id) VALUES ('$productName', '$productDescription', '$price', '$deliveryCharge','$productImageName','$R_Id')";
                 mysqli_query($conn, $sql);
-                header("Location: ../CoolAdmin-master/admin.php?uploadsuccess");
+                header("Location: ../CoolAdmin-master/restaurantpage.php?uploadsuccess");
 
             } else {
                 echo 'your image to big';

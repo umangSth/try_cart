@@ -11,34 +11,23 @@ echo "<form action='dummy.php' method='POST'>
     </form>";
 
 
+products();
 
-if(isset($_POST['submit'])){
-    
-    $user=$_POST['user'];
-    $query="SELECT * FROM users WHERE  UserName='".$user."'";
-    $result = mysqli_query($conn, $query);
-	while($row = mysqli_fetch_array($result)){
-        echo $row['userType'];
-		if($row['userType'] == 'admin' || 'customer')
-		{
-			login();
-        }
-	}
+    function products(){
+        global $conn;
+         
 
-	$query2='SELECT * FROM restaurants WHERE  R_User="'.$user.'"';
-	$result2 = mysqli_query($conn, $query2);
-	while($row = mysqli_fetch_array($result2)){
-		if($row['userType']=='restaurant'){
-			restaurantlogin();
-		}
-    }
-}
+         $get_R='SELECT * FROM restaurants ORDER by R_Id ASC';
+         $result_R= mysqli_query($conn, $get_R);
+         while ($R_row=mysqli_fetch_array($result_R)){
+            $get = 'SELECT * FROM products WHERE quantity > 0 and R_ID = '.$R_row['R_Id'].' ORDER by R_Id ASC';   
+            $result = mysqli_query($conn, $get);   
+            echo  'a'; 
+            while ($get_row=mysqli_fetch_array($result)){
+                echo 'b';
+            }     
+            
+             } 
+         }
+     
 
-
-function login(){
-    echo  'admin||coustomer';
-}
-
-function restaurantlogin(){
-    echo 'restaurant';
-}

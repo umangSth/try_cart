@@ -35,6 +35,23 @@ session_start();
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
        <a class="navbar-brand" href="index.php">FoodRocket</a>
+        <?php 
+        
+        if(isset($_SESSION{'userType'})){
+          if($_SESSION['userType'] =='admin'){
+            echo "<h3><a href='CoolAdmin-master/admin.php'>Into Admin</a></h3>";
+     
+          }
+          else if($_SESSION['userType'] == 'restaurant'){
+              echo "<h3><a href='CoolAdmin-master/restaurantpage.php'>Into Restaurant Admin</a></h3>";
+            }
+          }
+                  
+        ?>
+
+
+
+
       </ul>
           
             <?php

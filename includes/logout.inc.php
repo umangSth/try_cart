@@ -8,4 +8,6 @@ unset($_SESSION['userUid']);
 
 unset($_SESSION['userType']);
 
+unset($_SESSION['R_Id']);
+
 header("location: ../index.php");
