@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2019 at 04:20 AM
+-- Generation Time: Jun 02, 2019 at 06:33 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -21,6 +21,54 @@ SET time_zone = "+00:00";
 --
 -- Database: `items`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bill_table`
+--
+
+CREATE TABLE `bill_table` (
+  `Bill_Id` int(11) NOT NULL,
+  `Order_Ids_List` varchar(50) NOT NULL,
+  `UserId` varchar(50) NOT NULL,
+  `UserContact` int(11) NOT NULL,
+  `UserAddress` varchar(50) NOT NULL,
+  `Deliveryboy_name` varchar(50) NOT NULL,
+  `Deliveryboy_Contact` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bill_table`
+--
+
+INSERT INTO `bill_table` (`Bill_Id`, `Order_Ids_List`, `UserId`, `UserContact`, `UserAddress`, `Deliveryboy_name`, `Deliveryboy_Contact`) VALUES
+(11, '20, 29', 'Pradip123', 1234567890, 'ngt', 'test123', 1234567890),
+(13, '15', 'Pradip123', 1234567890, 'ngt', 'test123', 1234567890),
+(14, '25', 'san123', 1234567890, 'ngt', 'test123', 1234567890);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deliveryboy`
+--
+
+CREATE TABLE `deliveryboy` (
+  `deliveryboy_id` int(11) NOT NULL,
+  `deliveryboy_name` varchar(50) NOT NULL,
+  `deliveryboy_contact` int(11) NOT NULL,
+  `deliveryboy_email` varchar(50) NOT NULL,
+  `R_Id` int(11) NOT NULL,
+  `deliveryboy_password` varchar(100) NOT NULL,
+  `userType` varchar(50) NOT NULL DEFAULT 'deliveryboy'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `deliveryboy`
+--
+
+INSERT INTO `deliveryboy` (`deliveryboy_id`, `deliveryboy_name`, `deliveryboy_contact`, `deliveryboy_email`, `R_Id`, `deliveryboy_password`, `userType`) VALUES
+(7, 'test123', 1234567890, 'test123@gmail.com', 1, '$2y$10$2WJyVp3jbfDona7ye7HAgeJItqSVeD5dtxgGusCCtrtF/QbfZmfBK', 'deliveryboy');
 
 -- --------------------------------------------------------
 
@@ -45,20 +93,22 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`Order_Id`, `UserId`, `R_Id`, `Id`, `quantity`, `price`, `UserAddress`, `UserPhone`, `status`) VALUES
-(15, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered'),
-(16, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'ordered'),
-(17, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'ordered'),
+(15, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'OnTheWay'),
+(16, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'Ready'),
+(17, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
 (18, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered'),
 (19, 'Pradip123', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
-(20, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered'),
-(21, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'ordered'),
+(20, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'OnTheWay'),
+(21, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
 (22, 'test', 1, 25, 1, 100, 'ngt', 1234567890, 'ordered'),
 (23, 'test', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
 (24, 'test', 3, 28, 1, 50, 'ngt', 1234567890, 'ordered'),
-(25, 'san123', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
+(25, 'san123', 1, 26, 1, 250, 'ngt', 1234567890, 'OnTheWay'),
 (26, 'san123', 3, 30, 2, 200, 'ngt', 1234567890, 'ordered'),
 (27, 'san123', 1, 29, 1, 200, 'ngt', 1234567890, 'ordered'),
-(28, 'test1', 1, 25, 3, 100, 'ngt', 1234567890, 'ordered');
+(28, 'test1', 1, 25, 3, 100, 'ngt', 1234567890, 'Ready'),
+(29, 'Pradip123', 1, 24, 3, 120, 'ngt', 1234567890, 'OnTheWay'),
+(30, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered');
 
 -- --------------------------------------------------------
 
@@ -120,14 +170,37 @@ INSERT INTO `restaurants` (`R_Id`, `R_Name`, `R_Email`, `R_Address`, `R_Phone`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `no` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`no`, `name`, `description`) VALUES
+(1, 'book', 'abc'),
+(2, 'coffee', 'abc'),
+(3, 'book', 'abc'),
+(4, 'coffee', 'abc');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tracking`
 --
 
 CREATE TABLE `tracking` (
   `Tracking_Id` int(11) NOT NULL,
   `UserId` varchar(50) NOT NULL,
-  `latitude` varchar(50) NOT NULL,
-  `longitude` varchar(50) NOT NULL
+  `deliveryboy_name` varchar(50) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -162,6 +235,18 @@ INSERT INTO `users` (`UserId`, `UserName`, `UserEmail`, `UserAddress`, `UserPhon
 --
 
 --
+-- Indexes for table `bill_table`
+--
+ALTER TABLE `bill_table`
+  ADD PRIMARY KEY (`Bill_Id`);
+
+--
+-- Indexes for table `deliveryboy`
+--
+ALTER TABLE `deliveryboy`
+  ADD PRIMARY KEY (`deliveryboy_id`);
+
+--
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
@@ -181,6 +266,12 @@ ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`R_Id`);
 
 --
+-- Indexes for table `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`no`);
+
+--
 -- Indexes for table `tracking`
 --
 ALTER TABLE `tracking`
@@ -197,10 +288,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `bill_table`
+--
+ALTER TABLE `bill_table`
+  MODIFY `Bill_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `deliveryboy`
+--
+ALTER TABLE `deliveryboy`
+  MODIFY `deliveryboy_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -213,6 +316,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `restaurants`
   MODIFY `R_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `test`
+--
+ALTER TABLE `test`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tracking`
