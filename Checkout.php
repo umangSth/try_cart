@@ -145,12 +145,7 @@ if (isset($_GET['checkout'])){
     echo '<h1> Your Order is under process</h1>';
 }    
 
-
-
  ?>
-
-
-
 
 
 

@@ -23,6 +23,13 @@ if (isset($_POST['login-submit'])) {
 			restaurantlogin();
 		}
 	}
+	$query3='SELECT * FROM deliveryboy WHERE deliveryboy_name = "'.$UserId.'"';
+	$result3 = mysqli_query($conn, $query3);
+	while($row = mysqli_fetch_array($result3)){
+	if($row['userType']=='deliveryboy'){
+		deliveryboylogin();
+		}
+	}
 }
 
 else {
@@ -87,6 +94,59 @@ function restaurantlogin(){
 
 }
 
+function deliveryboylogin(){
+	$UserId =$_POST['uid'];
+	$Password =$_POST['pwd'];
+	global $conn;
+
+	if (empty($UserId) || empty($Password)) { #to check if the user left the field empty 
+		header("Location: ../index.php?error=emptyfields");
+		exit();
+	}
+	else{
+		$sql = "SELECT * FROM deliveryboy WHERE deliveryboy_name=? OR deliveryboy_email=?;";
+		$stmt = mysqli_stmt_init($conn);
+		if (!mysqli_stmt_prepare($stmt, $sql)) { #to check the connection 
+			header("Location: ../index.php?error=sqlerror1");
+			exit();
+		}
+		else{
+			mysqli_stmt_bind_param($stmt, "ss", $UserId, $UserId); #take the data from the $sql above and check the database
+			mysqli_stmt_execute($stmt);
+			$result = mysqli_stmt_get_result($stmt); #raw data we got from database
+			if ($row = mysqli_fetch_assoc($result)) {  #chanfe the raw result data to associative array
+				$pwdCheck  = password_verify($Password, $row['deliveryboy_password']);  #compares the typed pwd and database pwd 
+				if ($pwdCheck == false) {
+					header("Location: ../index.php?error=wrongpassword1"); #if pwd not same back to index page 
+					exit();
+				}
+				else if ($pwdCheck == true){
+						session_start();
+						$_SESSION['userId'] = $row['deliveryboy_name'];
+						$_SESSION['userUid'] = $row['deliveryboy_email'];
+						$_SESSION['userType'] = $row['userType'];
+						$_SESSION['R_Id']=$row['R_Id'];
+						header("Location: ../CoolAdmin-master/deliveryboy.php?login=success");
+					   exit();
+				}
+				else{
+					header("Location: ../index.php?error=wrongpassword2"); #if pwd not same back to index page 
+					exit();
+				}
+			}
+				
+				else{ #if we dont get any data from the database 
+					header("Location: ../index.php?error=nouser");
+					exit();
+
+				}
+
+		}
+
+	}
+
+}
+
 
 function login(){
 	$UserId =$_POST['uid'];
@@ -132,6 +192,7 @@ function login(){
 					 $_SESSION['userId'] = $row['UserName'];
 					 $_SESSION['userUid'] = $row['UserEmail'];
 					 $_SESSION['userAddress'] = $row['UserAddress'];
+					 $_SESSION['userType'] = $row['userType'];
 					 $_SESSION['userPhone'] = $row['UserPhone'];
  					header("Location: ../index.php?login=success");
 					exit();
@@ -154,3 +215,6 @@ function login(){
 	}
 
 }
+
+header("Location: ../index.php");
+	exit();

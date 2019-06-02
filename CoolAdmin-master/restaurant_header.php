@@ -64,7 +64,10 @@ session_start();
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Admin Home</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                
+
+                                <li>
+                                     <a href="../index.php">Main Page</a>
+                                </li>
                                 <li>
                                     <a href="restaurantpage.php">Add products</a>
                                 </li>
@@ -80,8 +83,8 @@ session_start();
                                 <i class="far fa-check-square"></i>Orders</a>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                            <a href="deliveryboy_signup.php">
+                                <i class="fas fa-calendar-alt"></i>Add Deliveryboy</a>
                         </li>
                         <li>
                             <a href="map.html">

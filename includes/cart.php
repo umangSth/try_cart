@@ -8,9 +8,9 @@ $page='../index.php';
 include 'dbh.inc.php';
 
 
-session_start();
 
 if (isset($_GET['add'])){
+    session_start();
     $sql= 'SELECT id, quantity FROM products WHERE id='.mysqli_real_escape_string($conn, (int)$_GET['add']);
     $quantity=mysqli_query($conn, $sql);
     while ($quantity_row = mysqli_fetch_array($quantity)){
@@ -37,21 +37,29 @@ function products(){
    global $conn;
     $get_R='SELECT * FROM restaurants ORDER by R_Id ASC';
     $result_R= mysqli_query($conn, $get_R);
+    if(isset($_SESSION['userType'])){
+    $userType = $_SESSION['userType'];
+    }    
    
     while ($R_row=mysqli_fetch_array($result_R)){
         $get = 'SELECT * FROM products WHERE quantity > 0 and R_ID = '.$R_row['R_Id'].' ORDER by R_Id ASC';   
         $result = mysqli_query($conn, $get); 
-        echo '<h1>Restaurant: '.$R_row['R_Name'].'</h1>';
+        echo '<div class="container"><h1>Restaurant: '.$R_row['R_Name'].'</h1>';
         echo '<hr>';    
         while ($get_row=mysqli_fetch_array($result)){
+            echo '<div style="height:500; breath:400px; float:left; ">';
             $img_url = "http://localhost/try_cart/img/product/".$get_row["image"];
-            echo '<img src="'.$img_url.'"><br>';
-            echo '<p>'.$get_row['name'].'<br>'.$get_row['description'].
-            '<br> &pound'.number_format($get_row['price'], 2).
-            '<a href="includes/cart.php?add='.$get_row['id'].'">Add</a>
-            ';
-            echo '<a href="includes/delete.php?del='.$get_row['id'].'">Delete Item DB</a></p>';     
-        }  
+            echo '<img src="'.$img_url.'" style="height:300px; breath:400px;"><br>';
+            echo '<p>'.$get_row['name'].'</p><br>
+            '.$get_row['description'].'
+            <br> Rs'.number_format($get_row['price'], 2);
+            if(isset($_SESSION['userType'])){ 
+            if($userType == 'customer'){
+            echo '<a href="includes/cart.php?add='.$get_row['id'].'">Add</a>';
+            }}
+            echo '</p></div>';
+        }
+        echo "</div>";  
     }
 }
 
@@ -91,7 +99,7 @@ function cart() {
                 $get = mysqli_query($conn, $query);
                 while ($get_row = mysqli_fetch_array($get)){
                     $sub = $get_row['price']*$value;
-                    echo $get_row['name'].' x '.$value.' @ &pound;'.number_format($get_row['price'], 2).' =  &pound;'.number_format($sub, 2).'<a href="includes/cart.php?remove='.$id.'">[-]</a><a href="includes/cart.php?add='.$id.'">[+]</a><a href="includes/cart.php?delete='.$id.'">[Delete]</a><br>';
+                    echo $get_row['name'].' x '.$value.' @ Rs;'.number_format($get_row['price'], 2).' =  Rs;'.number_format($sub, 2).'<a href="includes/cart.php?remove='.$id.'">[-]</a><a href="includes/cart.php?add='.$id.'">[+]</a><a href="includes/cart.php?delete='.$id.'">[Delete]</a><br>';
                 }
             }
             $total +=  $sub; // dont know why error is comming but code is running fine
@@ -106,7 +114,7 @@ function cart() {
     echo 'Your cart is empty';
     }
     else {
-        echo '<p>Total : &pound;'.number_format($total,2).'</p>';
+        echo '<p>Total : Rs;'.number_format($total,2).'</p>';
         echo '<p><h2><a href="Checkout.php">Check Out</a></h2></p>';
     }
 }

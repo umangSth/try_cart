@@ -5,8 +5,6 @@
 <br><br><br>
 
     <?php
-    
-    
     cart(); ?>
     <br><br>
      <?php products(); ?>

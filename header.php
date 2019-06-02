@@ -14,7 +14,15 @@ session_start();
     <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="css/js/jquery.min.js"></script>
   <script src="css/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/googlemap.js"></script>
     <style>
+
+        #map{
+          width:100%;
+          height: 100%;
+          border: 1px solid blue; 
+        }
+
         .error {color: #FF0000;}
     </style>
 </head>
@@ -61,6 +69,7 @@ session_start();
             <li>
             <form class="navbar-form navbar-right" action="includes/logout.inc.php" method="post">
                     <button type="submit" name="logout-submit">Logout</button>
+                    <a class="btn btn-info" href="track.php">Track</a>
             </form>
             </li>
             <li>
