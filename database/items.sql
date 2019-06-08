@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2019 at 06:33 AM
+-- Generation Time: Jun 08, 2019 at 03:21 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -133,7 +133,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `shipping`, `quantity`, `image`, `R_Id`) VALUES
 (24, 'French Fries', 'French Fries are tasty  fast food.', 120, 10, 5, 'french-fries.jpg', 1),
-(25, 'Mo:Mo', 'Mo:Mo are the most eaten fast food in nepal ', 100, 10, 5, 'momo.jpeg', 1),
+(25, 'Mo:Mo', 'MoMo are the most eaten fast food in nepal ', 100, 10, 5, 'momo.jpeg', 1),
 (26, 'Pizza', 'Pizza (Italian: [Ëˆpittsa], Neapolitan: [ËˆpittsÉ™]) is a savory dish of Italian origin.\r\n', 250, 20, 5, 'pizza.jpg', 1),
 (27, 'Rice', 'rice is common food', 100, 10, 2, 'rice_with_high_package.jpg', 3),
 (28, 'Pakora', 'Veg Pakora', 50, 5, 2, 'Veg_Pakora.jpg', 3),
@@ -170,28 +170,6 @@ INSERT INTO `restaurants` (`R_Id`, `R_Name`, `R_Email`, `R_Address`, `R_Phone`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `test`
---
-
-CREATE TABLE `test` (
-  `no` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`no`, `name`, `description`) VALUES
-(1, 'book', 'abc'),
-(2, 'coffee', 'abc'),
-(3, 'book', 'abc'),
-(4, 'coffee', 'abc');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tracking`
 --
 
@@ -202,6 +180,14 @@ CREATE TABLE `tracking` (
   `latitude` double NOT NULL,
   `longitude` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tracking`
+--
+
+INSERT INTO `tracking` (`Tracking_Id`, `UserId`, `deliveryboy_name`, `latitude`, `longitude`) VALUES
+(1, 'Pradip123', 'test123', 27.700919, 84.44219199999999),
+(2, 'san123', 'test123', 27.700919, 84.44219199999999);
 
 -- --------------------------------------------------------
 
@@ -266,12 +252,6 @@ ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`R_Id`);
 
 --
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`no`);
-
---
 -- Indexes for table `tracking`
 --
 ALTER TABLE `tracking`
@@ -318,16 +298,10 @@ ALTER TABLE `restaurants`
   MODIFY `R_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `test`
---
-ALTER TABLE `test`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `tracking`
 --
 ALTER TABLE `tracking`
-  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

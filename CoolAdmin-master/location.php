@@ -127,7 +127,7 @@ function loadDoc(position) {
 
 <?php
 
-  echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR'])));
+  echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=27.34.22.11')));
 
 ?>
 

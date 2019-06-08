@@ -1,43 +1,11 @@
 <?php include "header.php";
+require 'includes/dbh.inc.php';
 
+$user=$_SESSION['userId'];
+$sql = 'SELECT latitude, longitude FROM tracking WHERE UserId="'.$user.'"';
+$result=mysqli_query($conn, $sql);
+$row = mysqli_fetch_array($result);
 
-
-
-
-function get_ip(){
-  if(isset($_SERVER['HTTP_CLIENT_IP'])){
-    return $_SERVER['HTTP_CLIENT_IP'];
-  }
-  elseif(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
-    return $_SERVER['HTTP_X_FORWARDED_FOR'];
-  }
-  else {
-    return (isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '');
-  }
-}
-
-// $ip = get_ip();
-// echo $ip;
-
-$ip= '27.34.22.102';
-
-
-
-$geoplugin = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=27.34.22.102'));
-if ( is_numeric($geoplugin['geoplugin_latitude']) && is_numeric($geoplugin['geoplugin_longitude']) ) {
- 
-	$lat = $geoplugin['geoplugin_latitude'];
-  $long = $geoplugin['geoplugin_longitude'];
-
-}
-  echo $lat;
-  
-  echo $long;
-
-
-
-
-  
 
 
 ?>
@@ -56,7 +24,8 @@ if ( is_numeric($geoplugin['geoplugin_latitude']) && is_numeric($geoplugin['geop
 
 <div id="osm-map"></div>
   
-   <script>
+<script>
+
 //MAP 
 
 // Where you want to render the map.
@@ -73,7 +42,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-
+var timer =  setInterval(timer, 5000);
 
 function setLocation(lat, long){
 
@@ -84,21 +53,21 @@ map.setView(target, 14);
 
 // Place a marker on the same location.
 L.marker(target).addTo(map);
+
+}
+
+function timer(){
+    window.location='track.php';
 }
 
 //MAP
 
-var lat = "<?php echo $lat;?>";
+var lat = "<?php echo $row[0];?>";
 
-
-var long = "<?php echo $long;?>";
-
+var long = "<?php echo $row[1];?>";
 
 
 setLocation(lat, long);
-
-
-
 
 </script>
 
@@ -106,5 +75,6 @@ setLocation(lat, long);
 
 
 <?php 
+
 include 'footer.php';
 ?>

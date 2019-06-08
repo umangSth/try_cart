@@ -48,7 +48,7 @@ function products(){
         echo '<hr>';    
         while ($get_row=mysqli_fetch_array($result)){
             echo '<div style="height:500; breath:400px; float:left; ">';
-            $img_url = "http://localhost/try_cart/img/product/".$get_row["image"];
+            $img_url = "img/product/".$get_row["image"];
             echo '<img src="'.$img_url.'" style="height:300px; breath:400px;"><br>';
             echo '<p>'.$get_row['name'].'</p><br>
             '.$get_row['description'].'
@@ -91,6 +91,7 @@ function cart() {
     $conn = mysqli_connect("localhost", "root", "", "items");
     $total= 0;
     $sub=0;
+    
     foreach($_SESSION as $name => $value){
         if ($value > 0) {
             if(substr($name, 0, 5) == 'cart_'){
@@ -102,7 +103,7 @@ function cart() {
                     echo $get_row['name'].' x '.$value.' @ Rs;'.number_format($get_row['price'], 2).' =  Rs;'.number_format($sub, 2).'<a href="includes/cart.php?remove='.$id.'">[-]</a><a href="includes/cart.php?add='.$id.'">[+]</a><a href="includes/cart.php?delete='.$id.'">[Delete]</a><br>';
                 }
             }
-            $total +=  $sub; // dont know why error is comming but code is running fine
+            $total +=  $sub; 
         }
         // else{
         //     echo 'Your cart is empty.';

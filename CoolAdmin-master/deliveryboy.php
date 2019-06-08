@@ -36,6 +36,7 @@
     <link href="css/theme.css" rel="stylesheet" media="all">
 
 </head>
+<body>
 
 <form class="navbar-form navbar-right" action="../includes/logout.inc.php" method="post">
             <button type="submit" class="btn btn-info" name="logout-submit">Logout</button>
@@ -98,14 +99,15 @@ while($row = mysqli_fetch_array($Result)){
     }
     echo '</tbody></table></div>';
     echo 'Total : '.$total.'<br>';
-    echo '<a class="btn btn-info" href="location.inc.php">Start Tracking</a> ';
+    echo '<a class="btn btn-info" href=" deliveryboy.php?track&username='.$row['UserId'].'">Track</a>';
+    echo '<p id="demo"></p> ';
     echo '<a class="btn btn-info" href="#">Done Delivery</a> ';
     echo '            ';
     $total = 0;
     echo '<br><br><br><br><br>';
 }
 
-echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=27.34.106.210')));
+// echo var_export(unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=27.34.106.210')));
 
 
 
@@ -114,9 +116,102 @@ include 'footer.php';
 
 
 ?>
+<script>
+var x = document.getElementById("demo");
+
+
+  var timer =  setInterval(getLocation, 5000);
+
+// var myVar = setInterval(getLocation, 1000);
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(redirectToPosition);
+        console.log('something');
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function redirectToPosition(position) {
+    window.location='deliveryboy.php?lat='+position.coords.latitude+'&long='+position.coords.longitude;
+}
+
+function stopTimer(){
+    clearInterval(timer);
+}
+
+</script>
+<?php
+
+include '../includes/dbh.inc.php';
+//this will insert data in tracking table at initial
+$lat=(isset($_GET['lat']))?$_GET['lat']:'';
+$long=(isset($_GET['long']))?$_GET['long']:'';
+
+if(isset($_GET['lat'])){
+
+   $sql = 'SELECT DISTINCT UserId, Deliveryboy_name FROM bill_table WHERE Deliveryboy_name="'.$name.'"';
+   $Result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($Result)){
+                $sql = "SELECT * FROM tracking WHERE deliveryboy_name='".$name."' AND UserId='".$row['UserId']."'";
+        	    $stmt = mysqli_stmt_init($conn); #check connection between database and user login
+        	    if (!mysqli_stmt_prepare($stmt,$sql)) {
+        			header("Location: deliveryboy.php?error=sqlerror");
+        			exit();
+                }
+                else{
+                $resultCheck = mysqli_query($conn, $sql);	
+                if(mysqli_num_rows($resultCheck) > 0) {
+                    $query = 'UPDATE tracking SET latitude="'.$lat.'", longitude="'.$long.'" WHERE deliveryboy_name="'.$name.'" AND UserId="'.$row['UserId'].'"';
+                    mysqli_query($conn, $query);
+                }
+                else {
+                    $query = 'INSERT INTO tracking (UserId, deliveryboy_name, latitude, longitude) VALUES("'.$row['UserId'].'","'.$name.'", "'.$lat.'","'.$long.'")';
+                    mysqli_query($conn, $query);
+                }
+            }
+    }
+
+
+}
 
 
 
+// if(isset($_GET['track'])){
+
+
+//     $sql = "SELECT * FROM tracking WHERE deliveryboy_name='".$name."'";
+// 	    $stmt = mysqli_stmt_init($conn); #check connection between database and user login
+// 	    if (!mysqli_stmt_prepare($stmt,$sql)) {
+// 			header("Location: deliveryboy.php?error=sqlerror");
+// 			exit();
+//         }
+//     else{
+//         mysqli_stmt_bind_param($stmt,"s",$username);
+//         mysqli_stmt_execute($stmt);
+//         mysqli_stmt_store_result($stmt);
+//         $resultCheck = mysqli_stmt_num_rows($stmt);	
+//         if ($resultCheck > 0) {
+//             header("Location:../customerSignup.php?error=usertaken&mail=".$email);
+//             exit();
+
+//         }
+//     }
+    
+// }
+
+echo $lat;
+echo $long;
+
+
+
+
+
+?>
+<button onclick="stopTimer()"> Stop</button>
+</body>
+</html>
 
 
 
@@ -134,4 +229,6 @@ include 'footer.php';
 
 
             
-         
+
+
+
