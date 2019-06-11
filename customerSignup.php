@@ -3,6 +3,16 @@
 ?>
 
 <section class="main-container">
+
+
+
+<!-- signup success message -->
+<?php 
+    if(isset($_GET['signup']))
+    if($_GET['signup']=='success'){
+            {echo '<h2>signup successful</h2>';}}
+?>
+
     <div Class="main-wrapper">
         <h2>Signup</h2>
         <!-- <?php
@@ -32,13 +42,44 @@
         ?> -->
   
         <form class="signup-form" action="includes/signup.inc.php" method="POST">
-            <input type="text" name="uid" placeholder="Username">
-            <p class="error"> <?php echo isset($_GET['$nameErr']);?></p>
-            <input type="text" name="email" placeholder="E-mail">
-            
-            <input type="text" name="address" placeholder="Address">
-           
-            <input type="text" name="phone" placeholder="Phone Number">
+        
+            <p class="error">
+             <?php if(isset($_GET['uid'])){
+                    if($_GET['uid']=='')
+                        {echo 'Please Enter the UserName!!';}}?>
+            </p>
+            <input type="text" name="uid" placeholder="Username" value="<?php 
+                                                                                if(isset($_GET['error']))
+                                                                                {echo ($_GET['uid']);}
+                                                                        ?>">
+
+
+            <p class="error">
+             <?php if(isset($_GET['mail'])){
+                    if($_GET['mail']=='')
+                        {echo 'Please Enter the Email!!';}}?>
+            </p>
+            <input type="text"  name="email" placeholder="E-mail"  value="<?php 
+                                                                                if(isset($_GET['error']))
+                                                                                {echo ($_GET['mail']);} ?>">
+             <p class="error">
+             <?php if(isset($_GET['address'])){
+                    if($_GET['address']=='')
+                        {echo 'Please Enter the Address!!';}}?>
+            </p>
+            <input type="text" name="address" placeholder="Address"  value="<?php 
+                                                                                if(isset($_GET['error']))
+                                                                                {echo ($_GET['address']);} ?>">
+
+
+           <p class="error">
+             <?php if(isset($_GET['phone'])){
+                    if($_GET['phone']=='')
+                        {echo 'Please Enter the phone!!';}}?>
+            </p>
+            <input type="text" name="phone" placeholder="Phone Number"  value="<?php 
+                                                                                if(isset($_GET['error']))
+                                                                                {echo ($_GET['phone']);} ?>">
             
             <input type="password" name="pwd" placeholder="Password">
       
@@ -56,4 +97,3 @@
 ?>
    
 
- 

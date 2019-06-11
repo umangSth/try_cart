@@ -62,7 +62,19 @@ include 'includes/dbh.inc.php';
                 </div>';
             }
         }
+        date_default_timezone_set("Asia/Kathmandu");
+        echo "Today is " . date("Y/m/d h:i:sa") . "<br>";
+        echo "The time is " . date("h:i:sa");
+        $time = date("Y/m/d h:i:sa");
+        
+        echo '<br>date_default_timezone_set: ' . date_default_timezone_get() . '<br />';
+        echo $time;
 
+
+         $P_Name='SELECT name FROM products WHERE id=24';
+         $name=  mysqli_query($conn, $P_Name);
+        $aname = mysqli_fetch_array($name);
+        echo $aname[0];
     ?>
 </div>
 

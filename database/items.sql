@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2019 at 03:21 AM
+-- Generation Time: Jun 11, 2019 at 02:44 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -43,8 +43,6 @@ CREATE TABLE `bill_table` (
 --
 
 INSERT INTO `bill_table` (`Bill_Id`, `Order_Ids_List`, `UserId`, `UserContact`, `UserAddress`, `Deliveryboy_name`, `Deliveryboy_Contact`) VALUES
-(11, '20, 29', 'Pradip123', 1234567890, 'ngt', 'test123', 1234567890),
-(13, '15', 'Pradip123', 1234567890, 'ngt', 'test123', 1234567890),
 (14, '25', 'san123', 1234567890, 'ngt', 'test123', 1234567890);
 
 -- --------------------------------------------------------
@@ -93,12 +91,8 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`Order_Id`, `UserId`, `R_Id`, `Id`, `quantity`, `price`, `UserAddress`, `UserPhone`, `status`) VALUES
-(15, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'OnTheWay'),
 (16, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'Ready'),
 (17, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
-(18, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered'),
-(19, 'Pradip123', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
-(20, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'OnTheWay'),
 (21, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
 (22, 'test', 1, 25, 1, 100, 'ngt', 1234567890, 'ordered'),
 (23, 'test', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
@@ -107,8 +101,8 @@ INSERT INTO `order_list` (`Order_Id`, `UserId`, `R_Id`, `Id`, `quantity`, `price
 (26, 'san123', 3, 30, 2, 200, 'ngt', 1234567890, 'ordered'),
 (27, 'san123', 1, 29, 1, 200, 'ngt', 1234567890, 'ordered'),
 (28, 'test1', 1, 25, 3, 100, 'ngt', 1234567890, 'Ready'),
-(29, 'Pradip123', 1, 24, 3, 120, 'ngt', 1234567890, 'OnTheWay'),
-(30, 'Pradip123', 1, 24, 1, 120, 'ngt', 1234567890, 'ordered');
+(32, 'Pradip123', 1, 29, 2, 200, 'ngt', 1234567890, 'ordered'),
+(33, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'ordered');
 
 -- --------------------------------------------------------
 
@@ -138,7 +132,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `shipping`, `quant
 (27, 'Rice', 'rice is common food', 100, 10, 2, 'rice_with_high_package.jpg', 3),
 (28, 'Pakora', 'Veg Pakora', 50, 5, 2, 'Veg_Pakora.jpg', 3),
 (29, 'Chili paneer', 'chile Paneer', 200, 20, 2, 'Chilli-Paneer.jpg', 1),
-(30, 'ChowMein', 'Chowmein is fast food.', 200, 20, 3, 'ChowMein.jpg', 3);
+(30, 'ChowMein', 'Chowmein is fast food.', 200, 20, 3, 'ChowMein.jpg', 3),
+(31, 'Fish curry', 'Fish curry is made of Fish ', 199, 10, 5, 'Fish_Curry.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -186,8 +181,7 @@ CREATE TABLE `tracking` (
 --
 
 INSERT INTO `tracking` (`Tracking_Id`, `UserId`, `deliveryboy_name`, `latitude`, `longitude`) VALUES
-(1, 'Pradip123', 'test123', 27.700919, 84.44219199999999),
-(2, 'san123', 'test123', 27.700919, 84.44219199999999);
+(2, 'san123', 'test123', 27.4695853, 85.2722472);
 
 -- --------------------------------------------------------
 
@@ -214,7 +208,8 @@ INSERT INTO `users` (`UserId`, `UserName`, `UserEmail`, `UserAddress`, `UserPhon
 (3, 'Pradip123', 'pradip@gmail.com', 'ngt', 1234567890, '$2y$10$j/J50NcRNi4xWKkBPPLjIOiXZztCr01ertZG4xathYx/jj2qq69Xa', 'customer'),
 (4, 'san123', 'san123@gmail.com', 'ngt', 1234567890, '$2y$10$sV1cyZ0X0wnqPXlWRM.al.917wYhSCthXAJaQ.geZLcpsrPz6xKeO', 'customer'),
 (5, 'test', 'test@gmail.com', 'ngt', 1234567890, '$2y$10$csVgG6G1gsuoiil8bArAEO8ZjEbZ3DApd9U6WivhQKiSpnS318fM2', 'customer'),
-(6, 'test1', 'test1@gmail.com', 'ngt', 1234567890, '$2y$10$0mW1Zrak/fjCRkf0Rb7xMu6cg8oyX3fY3wiJAriJQrJ.wy8CCuIwu', 'customer');
+(6, 'test1', 'test1@gmail.com', 'ngt', 1234567890, '$2y$10$0mW1Zrak/fjCRkf0Rb7xMu6cg8oyX3fY3wiJAriJQrJ.wy8CCuIwu', 'customer'),
+(8, 'bil123', 'bill123@gmail.com', 'ngt', 1234567890, '$2y$10$P5xJfGoBHD27Ega/uuWmA.HlwfqakGDCTECSiJWNnTTpusjTiDvSe', 'customer');
 
 --
 -- Indexes for dumped tables
@@ -271,7 +266,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bill_table`
 --
 ALTER TABLE `bill_table`
-  MODIFY `Bill_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Bill_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `deliveryboy`
@@ -283,13 +278,13 @@ ALTER TABLE `deliveryboy`
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -301,13 +296,13 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `tracking`
 --
 ALTER TABLE `tracking`
-  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

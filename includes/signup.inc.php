@@ -1,6 +1,8 @@
 <?php
 if (isset($_POST["signup-submit"])) {
 
+	
+
 	require 'dbh.inc.php';
 
 	$username = $_POST['uid'];
@@ -12,26 +14,26 @@ if (isset($_POST["signup-submit"])) {
 
 	if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat) || empty($mobileNumber
 	) || empty($address) ){
-		header("Location:../customerSignup.php?error=emptyfields&uid=".$username."&mail=".$email."&phone=".$mobileNumber."&city=".$address."&street=".$streetName);
+		header("Location:../customerSignup.php?error=emptyfields&uid=".$username."&mail=".$email."&phone=".$mobileNumber."&address=".$address);
 		exit();
 	}
 	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username) ){
 		header("Location:../customerSignup.php?error=invalidmailuid");
 	}
 	elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  #filter_validate_email checks if email is valid or not
-		header("Location:../customerSignup.php?error=invalidmail&uid=".$username);
+		header("Location:../customerSignup.php?error=invalidmail&uid=".$username."&mail=&phone=".$mobileNumber."&address=".$address);
 		exit(); 
 	}
 	elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {  #filter_validate_email checks if email is valid or not
-		header("Location:../customerSignup.php?error=invaliduid&mail=".$email);
+		header("Location:../customerSignup.php?error=invaliduid&uid=&mail=".$email."&phone=".$mobileNumber."&address=".$address);
 		exit();
 	}
 	elseif (!preg_match("/^[0-9]*$/", $mobileNumber)) {  #checks if the mobile number is valid or not
-		header("Location:../customerSignup.php?error=invalidphone&mail=".$email."&uid=".$username);
+		header("Location:../customerSignup.php?error=invalidphone&uid=".$username."&mail=".$email."&phone=''&address=".$address);
 		exit();
 	}
 	elseif ($password !== $passwordRepeat) {
-		header("Location:../customerSignup.php?error=passwordcheck&mail=".$email."&uid=".$username);
+		header("Location:../customerSignup.php?error=passwordcheck&uid=".$username."&mail=".$email."&phone=".$mobileNumber."&address=".$address);
 		exit();
 		# code...
 	}
@@ -48,7 +50,7 @@ if (isset($_POST["signup-submit"])) {
 			mysqli_stmt_store_result($stmt);
 			$resultCheck = mysqli_stmt_num_rows($stmt);	
 			if ($resultCheck > 0) {
-				header("Location:../customerSignup.php?error=usertaken&mail=".$email);
+				header("Location:../customerSignup.php?error=usertaken&&uid=".$username."&mail=''&phone=".$mobileNumber."&address=".$address);
 				exit();
 
 			}

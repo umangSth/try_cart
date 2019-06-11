@@ -87,8 +87,8 @@ session_start();
                                 <i class="fas fa-calendar-alt"></i>Add Deliveryboy</a>
                         </li>
                         <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                            <a href="restaurant_order_record.php">
+                                <i class="fas fa-map-marker-alt"></i>Restaurant transition records</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">

@@ -46,6 +46,7 @@
 
 <?php
 session_start();
+date_default_timezone_set("Asia/Kathmandu");
 
 include '../includes/dbh.inc.php';
 $total = 0;
@@ -101,7 +102,15 @@ while($row = mysqli_fetch_array($Result)){
     echo 'Total : '.$total.'<br>';
     echo '<a class="btn btn-info" href=" deliveryboy.php?track&username='.$row['UserId'].'">Track</a>';
     echo '<p id="demo"></p> ';
-    echo '<a class="btn btn-info" href="#">Done Delivery</a> ';
+    echo '<form action="delivered.inc.php" method="POST">
+         <input type="hidden" name="UserName" value="'.$row["UserId"].'">
+         <input type="hidden" name="R_Id" value="'.$R_Id.'">
+         <input type="hidden" name="deliveryboy_name" value="'.$name.'">
+         <input type="hidden" name="timestamp" value="'.date("Y/m/d h:i:sa").'">
+
+
+         <button type="submit" name="submit-order" class="btn btn-primary">Done delivery</button>
+            </form> ';
     echo '            ';
     $total = 0;
     echo '<br><br><br><br><br>';
@@ -177,29 +186,6 @@ if(isset($_GET['lat'])){
 }
 
 
-
-// if(isset($_GET['track'])){
-
-
-//     $sql = "SELECT * FROM tracking WHERE deliveryboy_name='".$name."'";
-// 	    $stmt = mysqli_stmt_init($conn); #check connection between database and user login
-// 	    if (!mysqli_stmt_prepare($stmt,$sql)) {
-// 			header("Location: deliveryboy.php?error=sqlerror");
-// 			exit();
-//         }
-//     else{
-//         mysqli_stmt_bind_param($stmt,"s",$username);
-//         mysqli_stmt_execute($stmt);
-//         mysqli_stmt_store_result($stmt);
-//         $resultCheck = mysqli_stmt_num_rows($stmt);	
-//         if ($resultCheck > 0) {
-//             header("Location:../customerSignup.php?error=usertaken&mail=".$email);
-//             exit();
-
-//         }
-//     }
-    
-// }
 
 echo $lat;
 echo $long;

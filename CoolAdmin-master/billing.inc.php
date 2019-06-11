@@ -34,6 +34,13 @@ if(isset($_POST['signup-submit'])){
     
 }
 
+if(isset($_GET['ready'])){
+    $Order_Id=$_GET['orderid'];
+    $sql = 'UPDATE order_list SET status="Ready" WHERE Order_Id="'.$Order_Id.'"';
+    mysqli_query($conn, $sql);
+    header("Location: order.php");
+
+}
 else {
-    header('location: order.php');
+    header("Location: order.php");
 }

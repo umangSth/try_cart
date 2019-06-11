@@ -49,7 +49,7 @@
              <button type="submit" name="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
-   
+    <br><br><br><br>
         <!-- <?php
             // if(isset($_GET['error'])){
             //     if ($_GET['error'] == "emptyfields") {
@@ -81,6 +81,7 @@
 
 
 <?php 
+
     require "footer.php";
 ?>
    

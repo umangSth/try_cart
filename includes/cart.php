@@ -1,12 +1,9 @@
 <?php
 
-
-
 $page='../index.php'; 
 
 
 include 'dbh.inc.php';
-
 
 
 if (isset($_GET['add'])){
@@ -21,17 +18,21 @@ if (isset($_GET['add'])){
     header('Location: '.$page); 
 }
 
-if(isset($_GET['remove'])) {
-    $_SESSION['cart_'.(int)$_GET['remove']]--;
-    header('Location: '.$page);
+
+
+Function restaurant_name(){
+    global $conn;
+    $sql = 'SELECT R_Name FROM restaurants ORDER BY R_Id ASC ';
+    $result=mysqli_query($conn, $sql);
+    echo '<div class="container"><table class="table"><thead><tr>';
+    while($row=mysqli_fetch_array($result)){
+        
+        echo '<th><h4><a href="#'.$row['R_Name'].'">'.$row['R_Name'].'</a></h4></th>';
+        
+    }
+    echo '</tr></thead></table></div>';
+
 }
-
-if (isset ($_GET['delete'])) {
-    $_SESSION['cart_'.(int)$_GET['delete']]='0';
-    header('Location: '.$page);
-}
-
-
 
 function products(){
    global $conn;
@@ -40,28 +41,32 @@ function products(){
     if(isset($_SESSION['userType'])){
     $userType = $_SESSION['userType'];
     }    
-   
     while ($R_row=mysqli_fetch_array($result_R)){
         $get = 'SELECT * FROM products WHERE quantity > 0 and R_ID = '.$R_row['R_Id'].' ORDER by R_Id ASC';   
         $result = mysqli_query($conn, $get); 
-        echo '<div class="container"><h1>Restaurant: '.$R_row['R_Name'].'</h1>';
-        echo '<hr>';    
+        echo '<div class="container" id="'.$R_row['R_Name'].'"><h1><a href="restaurant_pg.php?r_id='.$R_row["R_Id"].'">Restaurant: '.$R_row['R_Name'].'</a></h1>';
+        echo '<hr>'; 
+        echo '<div class="row">'; 
         while ($get_row=mysqli_fetch_array($result)){
-            echo '<div style="height:500; breath:400px; float:left; ">';
+            echo '<div class="col-md-4">';
+            echo '<div class="thumbnail">';
             $img_url = "img/product/".$get_row["image"];
-            echo '<img src="'.$img_url.'" style="height:300px; breath:400px;"><br>';
-            echo '<p>'.$get_row['name'].'</p><br>
-            '.$get_row['description'].'
-            <br> Rs'.number_format($get_row['price'], 2);
+            echo '<img src="'.$img_url.'"  width="304" height="236" class="img-rounded" alt="Cinque Terre"><br>';
+            echo '<p>'.$get_row['name'].'</p>
+            <p>Description: '.$get_row['description'].'</p>
+             Rs'.number_format($get_row['price'], 2);
             if(isset($_SESSION['userType'])){ 
-            if($userType == 'customer'){
-            echo '<a href="includes/cart.php?add='.$get_row['id'].'">Add</a>';
-            }}
-            echo '</p></div>';
+              if($userType == 'customer'){
+                     echo '<p><a href="includes/cart.php?add='.$get_row['id'].'" class="btn btn-info">Add</a></p>';
+                }
+            }
+            echo '</div></div>';
+            
         }
-        echo "</div>";  
+       echo '</div></div>';
     }
 }
+
 
 // function paypal_items(){
 //     $num = 0;
@@ -100,7 +105,9 @@ function cart() {
                 $get = mysqli_query($conn, $query);
                 while ($get_row = mysqli_fetch_array($get)){
                     $sub = $get_row['price']*$value;
-                    echo $get_row['name'].' x '.$value.' @ Rs;'.number_format($get_row['price'], 2).' =  Rs;'.number_format($sub, 2).'<a href="includes/cart.php?remove='.$id.'">[-]</a><a href="includes/cart.php?add='.$id.'">[+]</a><a href="includes/cart.php?delete='.$id.'">[Delete]</a><br>';
+                    echo $get_row['name'].' x '.$value.' @ Rs;'.number_format($get_row['price'], 2).' =  Rs;'.number_format($sub, 2).'<a href="index.php?remove='.$id.'">[-]</a>
+                    <a href="includes/cart.php?add='.$id.'">[+]</a>
+                    <a href="index.php?delete='.$id.'">[Delete]</a><br>';
                 }
             }
             $total +=  $sub; 
@@ -120,4 +127,6 @@ function cart() {
     }
 }
 ?>
+
+
 

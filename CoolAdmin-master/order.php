@@ -42,7 +42,6 @@
                                                 $result=mysqli_query($conn, $sql);
                                                 while($row=mysqli_fetch_array($result)){
                                                     echo '<tr>
-                                                   
                                                     <td>'.$row["Order_Id"].'</td>
                                                     <td>'.$row["UserId"].'</td>
                                                     <td>'.$row["Id"].'</td>
@@ -56,7 +55,7 @@
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                       <a class="dropdown-item" href="#">ordered</a>
-                                                      <a class="dropdown-item" href="#">Ready</a>
+                                                      <a class="dropdown-item" href="billing.inc.php?ready&orderid='.$row["Order_Id"].'">Ready</a>
                                                       <a class="dropdown-item" href="#">Ontheway</a>
                                                     </div></div></td> 
                                                     ';
@@ -96,7 +95,7 @@
   
     <?php 
     
-    
+   
     
  
     
