@@ -1,17 +1,5 @@
 <?php include "header.php";?>
-<?php require "includes/cart.php";
 
-  
-if(isset($_GET['remove'])) {
-      $_SESSION['cart_'.(int)$_GET['remove']]--;
-      
-  }
-  
-  if (isset($_GET['delete'])) {
-      $_SESSION['cart_'.(int)$_GET['delete']]='0';
-      
-  }
- ?>
 
 
  <div class="container-fluid hero-image" style="background-image: url(img/1.jpg);">
@@ -29,7 +17,7 @@ if(isset($_GET['remove'])) {
 
     <?php
           
-          cart(); 
+         
           echo '<br><br>';
           restaurant_name();?>
     <br><br>
@@ -41,3 +29,11 @@ if(isset($_GET['remove'])) {
 <?php 
 include 'footer.php';
 ?>
+
+
+
+
+
+
+
+

@@ -48,6 +48,7 @@ session_start();
 
 </head>
 
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->

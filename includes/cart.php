@@ -12,7 +12,8 @@ if (isset($_GET['add'])){
     $quantity=mysqli_query($conn, $sql);
     while ($quantity_row = mysqli_fetch_array($quantity)){
         if ($quantity_row['quantity']!=$_SESSION['cart_'.(int)$_GET['add']]){
-            $_SESSION['cart_'.(int)$_GET['add']]+='1';
+            $_SESSION['cart_'.(int)$_GET['add'].$_SESSION['userId']]+=1;
+            // session_destroy();
         }
     }
     header('Location: '.$page); 
@@ -42,18 +43,18 @@ function products(){
     $userType = $_SESSION['userType'];
     }    
     while ($R_row=mysqli_fetch_array($result_R)){
-        $get = 'SELECT * FROM products WHERE quantity > 0 and R_ID = '.$R_row['R_Id'].' ORDER by R_Id ASC';   
+        $get = 'SELECT * FROM products WHERE quantity > 0 and R_Id = '.$R_row['R_Id'].' ORDER BY RAND() LIMIT 3';   
         $result = mysqli_query($conn, $get); 
         echo '<div class="container" id="'.$R_row['R_Name'].'"><h1><a href="restaurant_pg.php?r_id='.$R_row["R_Id"].'">Restaurant: '.$R_row['R_Name'].'</a></h1>';
         echo '<hr>'; 
         echo '<div class="row">'; 
         while ($get_row=mysqli_fetch_array($result)){
             echo '<div class="col-md-4">';
-            echo '<div class="thumbnail">';
+            echo '<div class="card" >';
             $img_url = "img/product/".$get_row["image"];
-            echo '<img src="'.$img_url.'"  width="304" height="236" class="img-rounded" alt="Cinque Terre"><br>';
-            echo '<p>'.$get_row['name'].'</p>
-            <p>Description: '.$get_row['description'].'</p>
+            echo '<img src="'.$img_url.'" class="card-img-top" width="280px" height="200" alt="Cinque Terre"><br>';
+            echo '<p class="card-title">'.$get_row['name'].'</p>
+            <p class="card-text">Description: '.$get_row['description'].'</p>
              Rs'.number_format($get_row['price'], 2);
             if(isset($_SESSION['userType'])){ 
               if($userType == 'customer'){
@@ -92,25 +93,46 @@ function products(){
 //     }
 // }
 
+
+
+//this is cart function
 function cart() {
     $conn = mysqli_connect("localhost", "root", "", "items");
     $total= 0;
     $sub=0;
+    $q =0;
+    
     
     foreach($_SESSION as $name => $value){
         if ($value > 0) {
+           
             if(substr($name, 0, 5) == 'cart_'){
-               $id = substr($name, 5, (strlen($name)-5));//this will help to take id of item by subtracting the above cart_
-                $query = 'SELECT id, name, price FROM products WHERE id='.mysqli_real_escape_string($conn, (int)$id);
-                $get = mysqli_query($conn, $query);
-                while ($get_row = mysqli_fetch_array($get)){
+                
+                $end=strlen($name);
+                $userLen=($end-strlen($_SESSION['userId']));
+                if(substr($name, $userLen,$end) == $_SESSION['userId'])
+                {   
+                    
+                    $a = substr($name, 5, strlen($name));
+                    $id = substr($a, 0,(strlen($a)-strlen($_SESSION['userId']))); //this will help to take id of item by subtracting the above cart_
+                     $query = 'SELECT id, name, price FROM products WHERE id='.mysqli_real_escape_string($conn, (int)$id);
+
+                    $get = mysqli_query($conn, $query);
+                   
+                    while ($get_row = mysqli_fetch_array($get)){
                     $sub = $get_row['price']*$value;
-                    echo $get_row['name'].' x '.$value.' @ Rs;'.number_format($get_row['price'], 2).' =  Rs;'.number_format($sub, 2).'<a href="index.php?remove='.$id.'">[-]</a>
+                  
+                    echo $get_row['name'].' x '.$value.' @ Rs'.number_format($get_row['price'], 2).' =  Rs'.number_format($sub, 2).'
+                    <a href="index.php?remove='.$id.'">[-]</a>
                     <a href="includes/cart.php?add='.$id.'">[+]</a>
                     <a href="index.php?delete='.$id.'">[Delete]</a><br>';
+                    
+                }
+                   
                 }
             }
             $total +=  $sub; 
+            
         }
         // else{
         //     echo 'Your cart is empty.';
@@ -122,10 +144,54 @@ function cart() {
     echo 'Your cart is empty';
     }
     else {
-        echo '<p>Total : Rs;'.number_format($total,2).'</p>';
-        echo '<p><h2><a href="Checkout.php">Check Out</a></h2></p>';
+        
+        echo '<p>Total : Rs'.number_format($total,2).'</p>';
+        echo '<p><h3><a class="btn btn-info" href="Checkout.php">Check Out</a></h3></p>';
+       
     }
 }
+
+
+
+// this function is to show the quantity in cart menu
+function quantity(){
+    $q=0;
+    global $conn;
+    foreach($_SESSION as $name => $value){
+        if ($value > 0) {
+            
+            if(substr($name, 0, 5) == 'cart_'){
+                // echo $value;
+                $end=strlen($name);
+                $userLen=($end-strlen($_SESSION['userId']));
+                if(substr($name, $userLen,$end) == $_SESSION['userId'])
+                {   
+                    // echo $value;
+                    $a = substr($name, 5, strlen($name));
+                     $id = substr($a, 0,(strlen($a)-strlen($_SESSION['userId'])));
+                    $query = 'SELECT id, name, price FROM products WHERE id='.mysqli_real_escape_string($conn, (int)$id);
+                    $get = mysqli_query($conn, $query);
+                    while ($get_row = mysqli_fetch_array($get)){
+                        $q += $value;
+                        
+
+                    }
+                    //  $q += $value;
+                     
+                    
+                }
+                
+            }
+           
+        }
+       
+    }
+    echo $q;
+  
+
+}
+
+
 ?>
 
 

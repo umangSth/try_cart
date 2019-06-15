@@ -28,7 +28,7 @@ if (isset ($_GET['delete'])) {
     header('Location: Checkout.php');
 }
 
-function cart() {
+function cart2() {
 
     echo "<table class='table'>
             <thead>
@@ -58,8 +58,8 @@ function cart() {
                     <tr>
                     <td>'.$get_row['name'].'</td>
                     <td> '.$value.'</td>
-                    <td>  &pound;'.number_format($get_row['price'], 2).'</td>
-                    <td>  &pound;'.number_format($sub, 2).'<a href="Checkout.php?remove='.$id.'">[-]</a>
+                    <td>  Rs'.number_format($get_row['price'], 2).'</td>
+                    <td>  Rs'.number_format($sub, 2).'<a href="Checkout.php?remove='.$id.'">[-]</a>
                     <a href="Checkout.php?add='.$id.'">[+]</a>
                     <a href="Checkout.php?delete='.$id.'">[Delete]</a>
                     </td>
@@ -81,7 +81,7 @@ function cart() {
         echo "<div class='container'>
         </tbody></table>
         
-        <p>Total : &pound;".number_format($total,2)."</p>
+        <p>Total : Rs ".number_format($total,2)."</p>
 
         <a href='Checkout.php?checkout' class='btn btn-info' role='button'>Pay On Delivery</a>
         <li>Extra charge will be Added</li>
@@ -180,9 +180,9 @@ function paypal_items(){
 
 
 
-cart();
 
 
+cart2();
 
 
 include 'footer.php';

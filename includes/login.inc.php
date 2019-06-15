@@ -73,7 +73,7 @@ function restaurantlogin(){
 						$_SESSION['userUid'] = $row['R_Email'];
 						$_SESSION['userType'] = $row['userType'];
 						$_SESSION['R_Id']=$row['R_Id'];
-						header("Location: ../CoolAdmin-master/restaurantpage.php?login=success");
+						header("Location: ../Admin/restaurantpage.php?login=success");
 					   exit();
 				}
 				else{
@@ -126,7 +126,7 @@ function deliveryboylogin(){
 						$_SESSION['userUid'] = $row['deliveryboy_email'];
 						$_SESSION['userType'] = $row['userType'];
 						$_SESSION['R_Id']=$row['R_Id'];
-						header("Location: ../CoolAdmin-master/deliveryboy.php?login=success");
+						header("Location: ../Admin/deliveryboy.php?login=success");
 					   exit();
 				}
 				else{

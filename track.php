@@ -49,7 +49,7 @@ function setLocation(lat, long){
     // Target's GPS coordinates.
 var target = L.latLng(lat, long);
 // Set map's center to target with zoom 14.
-map.setView(target, 14);
+map.setView(target, 16);
 
 // Place a marker on the same location.
 L.marker(target).addTo(map);

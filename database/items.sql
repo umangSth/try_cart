@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2019 at 02:44 PM
+-- Generation Time: Jun 15, 2019 at 01:35 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.4
 
@@ -43,7 +43,7 @@ CREATE TABLE `bill_table` (
 --
 
 INSERT INTO `bill_table` (`Bill_Id`, `Order_Ids_List`, `UserId`, `UserContact`, `UserAddress`, `Deliveryboy_name`, `Deliveryboy_Contact`) VALUES
-(14, '25', 'san123', 1234567890, 'ngt', 'test123', 1234567890);
+(2, '3, 4, 5', 'Pradip123', 1234567890, 'ngt', 'test123', 1234567890);
 
 -- --------------------------------------------------------
 
@@ -91,18 +91,9 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`Order_Id`, `UserId`, `R_Id`, `Id`, `quantity`, `price`, `UserAddress`, `UserPhone`, `status`) VALUES
-(16, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'Ready'),
-(17, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
-(21, 'Pradip123', 3, 28, 1, 50, 'ngt', 1234567890, 'Ready'),
-(22, 'test', 1, 25, 1, 100, 'ngt', 1234567890, 'ordered'),
-(23, 'test', 1, 26, 1, 250, 'ngt', 1234567890, 'ordered'),
-(24, 'test', 3, 28, 1, 50, 'ngt', 1234567890, 'ordered'),
-(25, 'san123', 1, 26, 1, 250, 'ngt', 1234567890, 'OnTheWay'),
-(26, 'san123', 3, 30, 2, 200, 'ngt', 1234567890, 'ordered'),
-(27, 'san123', 1, 29, 1, 200, 'ngt', 1234567890, 'ordered'),
-(28, 'test1', 1, 25, 3, 100, 'ngt', 1234567890, 'Ready'),
-(32, 'Pradip123', 1, 29, 2, 200, 'ngt', 1234567890, 'ordered'),
-(33, 'Pradip123', 3, 27, 1, 100, 'ngt', 1234567890, 'ordered');
+(3, 'Pradip123', 1, 40, 1, 150, 'ngt', 1234567890, 'OnTheWay'),
+(4, 'Pradip123', 1, 34, 1, 200, 'ngt', 1234567890, 'OnTheWay'),
+(5, 'Pradip123', 1, 36, 1, 100, 'ngt', 1234567890, 'OnTheWay');
 
 -- --------------------------------------------------------
 
@@ -118,22 +109,34 @@ CREATE TABLE `products` (
   `shipping` float NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT '5',
   `image` varchar(250) NOT NULL,
-  `R_Id` int(11) NOT NULL
+  `R_Id` int(11) NOT NULL,
+  `categories` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `shipping`, `quantity`, `image`, `R_Id`) VALUES
-(24, 'French Fries', 'French Fries are tasty  fast food.', 120, 10, 5, 'french-fries.jpg', 1),
-(25, 'Mo:Mo', 'MoMo are the most eaten fast food in nepal ', 100, 10, 5, 'momo.jpeg', 1),
-(26, 'Pizza', 'Pizza (Italian: [Ëˆpittsa], Neapolitan: [ËˆpittsÉ™]) is a savory dish of Italian origin.\r\n', 250, 20, 5, 'pizza.jpg', 1),
-(27, 'Rice', 'rice is common food', 100, 10, 2, 'rice_with_high_package.jpg', 3),
-(28, 'Pakora', 'Veg Pakora', 50, 5, 2, 'Veg_Pakora.jpg', 3),
-(29, 'Chili paneer', 'chile Paneer', 200, 20, 2, 'Chilli-Paneer.jpg', 1),
-(30, 'ChowMein', 'Chowmein is fast food.', 200, 20, 3, 'ChowMein.jpg', 3),
-(31, 'Fish curry', 'Fish curry is made of Fish ', 199, 10, 5, 'Fish_Curry.jpg', 1);
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `shipping`, `quantity`, `image`, `R_Id`, `categories`) VALUES
+(32, 'Fried Chicken Rice', 'Fried rice is a dish of cooked rice that has been stir-fried in a wok or a frying pan and is usually mixed with other ingredients such as eggs, vegetables, seafood, or meat.', 150, 20, 5, 'Fried-chicken-Rice.jpg', 1, 'Fried-Rice'),
+(33, 'Fired Veg Rice', 'Fried rice is a dish of cooked rice that has been stir-fried in a wok or a frying pan and is usually mixed with other ingredients such as eggs, vegetables, seafood, or meat.', 120, 20, 5, 'fried-veg-rice.jpg', 1, 'Fried-Rice'),
+(34, 'Mutton Curry Rice', 'Tender, succulent pieces of meat are cooked in a spicy gravy that makes it the perfect bowl of comfort food with basmati rice.', 200, 20, 5, 'mutton_curry-rice.jpg', 1, 'Fried-Rice'),
+(35, 'Buff Chowmein', 'Chow Mein (ç‚’é¢) literally means â€œfried noodles,â€ and is usually made with noodles, a protein, and vegetables stir-fried with a sauce.', 120, 20, 5, 'Buff-Chowmein.jpg', 1, 'Chowmein'),
+(36, 'Chicken Chowmein', 'Chow Mein (ç‚’é¢) literally means â€œfried noodles,â€ and is usually made with noodles, a protein, and vegetables stir-fried with a sauce.', 100, 20, 5, 'chicken-chowmein.jpg', 1, 'Chowmein'),
+(37, 'Veg Chowmein', 'Chow Mein (ç‚’é¢) literally means â€œfried noodles,â€ and is usually made with noodles, a protein, and vegetables stir-fried with a sauce.', 80, 20, 5, 'veg-chowmein.jpg', 1, 'Chowmein'),
+(38, 'Buff Momo', ' Momo is a type of steamed dumpling with some form of filling. Momo has become a traditional delicacy in Nepal, Tibet and Bhutan', 130, 20, 5, 'buff-momo.png', 1, 'Momo'),
+(39, 'Fired Buff MoMo', ' Momo is a type of steamed dumpling with some form of filling. Momo has become a traditional delicacy in Nepal, Tibet.', 160, 20, 5, 'fried-buff-momo.png', 1, 'Momo'),
+(40, 'Soup Buff MoMo', ' Momo is a type of steamed dumpling with some form of filling. Momo has become a traditional delicacy in Nepal, Tibet.', 150, 25, 5, 'soup-buff-momo.jpg', 1, 'Momo'),
+(41, 'Veg MoMo', ' Momo is a type of steamed dumpling with some form of filling. Momo has become a traditional delicacy in Nepal, Tibet.', 110, 20, 5, 'veg-momo.jpg', 1, 'Momo'),
+(42, 'Avocado and Bacon Sandwich', 'sandwiches is made with toast, herb mayonnaise, avocado, bacon, and sprouts, seasoning with salt and pepper.', 100, 20, 5, 'avocado-and-Bacon-Cheese-sandwich.jpg', 3, 'sandwich'),
+(43, 'Meatball Sandwich', 'The sandwich primarily consists of meatballs(Buff), a tomato sauce or marinara sauce, and bread.', 120, 20, 5, 'meatball-sandwich.jpg', 3, 'sandwich'),
+(44, 'Tuna Mayo Sandwich', 'Tuna Mayo Sandwich is a sandwich made from canned tunaâ€”usually made into a tuna salad by adding mayonnaise, and sometimes other ingredients.', 120, 20, 5, 'tuna-mayo-sandwich.jpeg', 3, 'sandwich'),
+(45, 'Bacon Burger', '50% buff. 50% bacon. Ground up into a sexy pile of meat and then turned into the most life altering burgers you will ever stuff in your face.', 180, 20, 5, 'bacon-burger.jpg', 3, 'burger'),
+(46, 'Cheese and Buff Burger', 'As with other hamburgers, a cheeseburger may include toppings, such as lettuce, tomato, onion, pickles, buff, mayonnaise, ketchup, mustard or other toppings', 180, 20, 5, 'cheese-buff-burger.jpg', 3, 'burger'),
+(47, 'Chicken Burger ', 'Our Flame Grilled Chicken Burger features a savory flame-grilled chicken burger patty topped with juicy tomatoes, fresh lettuce, creamy mayonnaise, ketchup, crunchy pickles, and sliced white onions on a soft toasted brioche style bun.', 150, 20, 5, 'chicken-burger.jpg', 3, 'burger'),
+(48, 'Mushroom Pizza', 'This mushroom pizza recipe has a thin and crispy crust, right amount of mushrooms and a combination of spices which turns into a delicious Italian pizza.', 210, 20, 5, 'Mushroom-Pizza.jpg', 3, 'pizza'),
+(49, 'Black Olive Pizza', 'Brush the border with olive oil, sprinkle with garlic powder and sprinkle with parmesan cheese. Spread the olives and onions over the sauce and top with cheese. Bake for 12 to 15 minutes until crust is crisp.', 220, 20, 5, 'Olive-pizza.jpg', 3, 'pizza'),
+(50, 'Sausage Pizza', 'Spicy sausage, onions, mushrooms and plenty of cheese make this pizza from our Test Kitchen a real keeper. It beats the delivery variety every timeâ€”and thereâ€™s no wait! ', 200, 20, 5, 'sausage-pizza.jpg', 3, 'pizza');
 
 -- --------------------------------------------------------
 
@@ -181,7 +184,7 @@ CREATE TABLE `tracking` (
 --
 
 INSERT INTO `tracking` (`Tracking_Id`, `UserId`, `deliveryboy_name`, `latitude`, `longitude`) VALUES
-(2, 'san123', 'test123', 27.4695853, 85.2722472);
+(1, 'Pradip123', 'test123', 27.6837038, 84.4458531);
 
 -- --------------------------------------------------------
 
@@ -209,7 +212,8 @@ INSERT INTO `users` (`UserId`, `UserName`, `UserEmail`, `UserAddress`, `UserPhon
 (4, 'san123', 'san123@gmail.com', 'ngt', 1234567890, '$2y$10$sV1cyZ0X0wnqPXlWRM.al.917wYhSCthXAJaQ.geZLcpsrPz6xKeO', 'customer'),
 (5, 'test', 'test@gmail.com', 'ngt', 1234567890, '$2y$10$csVgG6G1gsuoiil8bArAEO8ZjEbZ3DApd9U6WivhQKiSpnS318fM2', 'customer'),
 (6, 'test1', 'test1@gmail.com', 'ngt', 1234567890, '$2y$10$0mW1Zrak/fjCRkf0Rb7xMu6cg8oyX3fY3wiJAriJQrJ.wy8CCuIwu', 'customer'),
-(8, 'bil123', 'bill123@gmail.com', 'ngt', 1234567890, '$2y$10$P5xJfGoBHD27Ega/uuWmA.HlwfqakGDCTECSiJWNnTTpusjTiDvSe', 'customer');
+(8, 'bil123', 'bill123@gmail.com', 'ngt', 1234567890, '$2y$10$P5xJfGoBHD27Ega/uuWmA.HlwfqakGDCTECSiJWNnTTpusjTiDvSe', 'customer'),
+(9, 'lama123', 'lama1@gmail.com', 'ngt', 1234567890, '$2y$10$SZRHoOVwaxL.mlFExuDJ/.JrOX0bhsVda2ViAMkNThaDP1/vdM.jS', 'customer');
 
 --
 -- Indexes for dumped tables
@@ -266,7 +270,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bill_table`
 --
 ALTER TABLE `bill_table`
-  MODIFY `Bill_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Bill_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `deliveryboy`
@@ -278,13 +282,13 @@ ALTER TABLE `deliveryboy`
 -- AUTO_INCREMENT for table `order_list`
 --
 ALTER TABLE `order_list`
-  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `Order_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `restaurants`
@@ -296,13 +300,13 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `tracking`
 --
 ALTER TABLE `tracking`
-  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Tracking_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables

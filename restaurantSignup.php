@@ -49,6 +49,7 @@
              <button type="submit" name="submit" class="btn btn-default">Submit</button>
         </form>
     </div>
+    </section>
     <br><br><br><br>
         <!-- <?php
             // if(isset($_GET['error'])){
