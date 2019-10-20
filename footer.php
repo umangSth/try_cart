@@ -6,6 +6,7 @@
                                 <a class="link" href="#">For Business</a>
                                 <a class="link" href="#">Become an Instructor</a>
                                 <a class="link" href="#">Mobile Applications</a>
+                                <p>Mobile</p>
                                 <a class="link" href="#">Support</a>
                                 <a class="link" href="#">Help</a>
                             </nav>
