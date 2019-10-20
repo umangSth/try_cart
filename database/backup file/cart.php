@@ -44,7 +44,7 @@ function products(){
         echo '<h1>Restaurant: '.$R_row['R_Name'].'</h1>';
         echo '<hr>';    
         while ($get_row=mysqli_fetch_array($result)){
-            $img_url = "http://localhost/try_cart/img/product/".$get_row["image"];
+            $img_url = "http://localhost:8080/try_cart/img/product/".$get_row["image"];
             echo '<img src="'.$img_url.'"><br>';
             echo '<p>'.$get_row['name'].'<br>'.$get_row['description'].
             '<br> &pound'.number_format($get_row['price'], 2).
